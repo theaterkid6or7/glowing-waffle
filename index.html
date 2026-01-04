@@ -3,32 +3,83 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Robot Dude — Home</title>
+<title>Absolutely Not™  |  Lifelike Humanoid Robots</title>
+<meta name="description" content="Design your own adult humanoid robot. Eat, drink, pee, cum. Purely synthetic. 18+ only.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>Robot Dude Demo Site</h1>
+<header class="top">
+  <div class="logo">Absolutely Not™</div>
   <nav>
-    <a href="index.html">Home</a> |
-    <a href="build.html">Build (18+)</a> |
-    <a href="#" onclick="logout()">Logout</a>
+    <a href="#showcase">Showcase</a>
+    <a href="#tech">Tech</a>
+    <a href="#faq">FAQ</a>
+    <a href="#" class="cta" id="buyBtn">Customise & Buy</a>
   </nav>
 </header>
 
 <main>
-  <h2>Welcome</h2>
-  <p>This is a <strong>test site</strong> for the boy-robot configurator.</p>
-  <ul>
-    <li><a href="login.html">Login / Register</a></li>
-    <li><a href="build.html">18+ Robot Builder</a> (requires login + age-gate)</li>
-  </ul>
-  <p>All data stays in your browser; no backend.</p>
+  <section id="hero">
+    <h1>Humanoid Robots<br><span class="gold">Built to Order.</span></h1>
+    <p>Eat, drink, pee, cum — all synthetic. Pick the parts. We build it.</p>
+    <button class="big cta" id="buyBtn2">Start Building (18+)</button>
+  </section>
+
+  <section id="showcase">
+    <h2>Gallery</h2>
+    <div class="grid">
+      <div class="card"><img src="https://via.placeholder.com/400x600/8D5524/fff?text=Robot+1" alt=""></div>
+      <div class="card"><img src="https://via.placeholder.com/400x600/C68642/fff?text=Robot+2" alt=""></div>
+      <div class="card"><img src="https://via.placeholder.com/400x600/F1C4B3/fff?text=Robot+3" alt=""></div>
+    </div>
+  </section>
+
+  <section id="tech">
+    <h2>How it works</h2>
+    <ol>
+      <li>Customise anatomy, hair, kinks.</li>
+      <li>We 3-D print bones, mould silicone, assemble.</li>
+      <li>Shipped in 90 days. Unbox, charge, play.</li>
+    </ol>
+  </section>
+
+  <section id="faq">
+    <h2>FAQ</h2>
+    <details><summary>Is the robot sentient?</summary><p>No. LLM + scripted behaviours only.</p></details>
+    <details><summary>How do I clean it?</summary><p>Self-flushing channels + removable inserts. Dishwasher-safe.</p></details>
+    <details><summary>Can I disable sex functions?</summary><p>Yes — one click in the app.</p></details>
+  </section>
 </main>
 
 <footer>
-  &copy; 2024 Test Site — pure front-end demo
+  <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Contact</a><br>
+  © 2024 Absolutely Not™ — 18+ only
 </footer>
+
+<!-- BUY MODAL / AGE GATE -->
+<div id="buyModal" class="modal">
+  <div class="modalContent">
+    <h2>18+ Age Verification</h2>
+    <label><input type="checkbox" id="ageOK"> I am 18 or older</label><br><br>
+    <button id="enterCustom">Enter Customiser</button>
+    <button id="closeModal">Cancel</button>
+  </div>
+</div>
+
 <script src="app.js"></script>
+<script>
+// open modal
+['buyBtn','buyBtn2'].forEach(id=>
+  document.getElementById(id).onclick = () => document.getElementById('buyModal').style.display='flex'
+);
+document.getElementById('closeModal').onclick = () => document.getElementById('buyModal').style.display='none';
+
+// enter customiser
+document.getElementById('enterCustom').onclick = function(){
+  if(!document.getElementById('ageOK').checked) return alert('Please confirm 18+');
+  const redirect = 'buy.html'; // gate + iframe
+  location.href = redirect;
+};
+</script>
 </body>
 </html>
