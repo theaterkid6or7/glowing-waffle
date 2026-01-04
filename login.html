@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login – Robot Dude</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><h1>Login / Register</h1></header>
+
+<main>
+  <form id="loginForm">
+    <input type="text" id="user" placeholder="username" required>
+    <input type="password" id="pass" placeholder="password" required>
+    <button type="submit">Login</button>
+    <button type="button" id="regBtn">Register</button>
+  </form>
+  <div id="msg"></div>
+</main>
+
+<footer><a href="index.html">Back to Home</a></footer>
+<script src="app.js"></script>
+<script>
+const form = document.getElementById('loginForm');
+const msg  = document.getElementById('msg');
+const redirect = new URLSearchParams(location.search).get('redirect') || 'build.html';
+
+function flash(text, ok) {
+  msg.className = 'alert ' + (ok ? 'ok' : 'bad');
+  msg.textContent = text;
+}
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const u = form.user.value.trim(), p = form.pass.value;
+  const res = login(u,p);
+  flash(res.msg || 'OK', res.ok);
+  if (res.ok) location.href = redirect;
+});
+document.getElementById('regBtn').onclick = () => {
+  const u = form.user.value.trim(), p = form.pass.value;
+  if (!u || !p) return flash('Fill both fields', false);
+  const res = register(u,p);
+  flash(res.msg || 'Registered – now login', res.ok);
+};
+</script>
+</body>
+</html>
